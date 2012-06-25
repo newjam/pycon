@@ -1,0 +1,70 @@
+<html><head><style type="text/css">
+    .error.focus { background-color:IndianRed; }
+    .error.comparable { background-color:IndianRed; }
+    .error { background-color:Red; }
+    .inconsistent { background-color:Orange; }
+    .focus { background-color:LawnGreen; }
+    .comparable { background-color:LimeGreen; }
+  </style><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script type="text/javascript">m = {"t8": ["t9", "t4", "t5"], "t9": ["t8", "t10", "t12", "t5"], "t6": [], "t7": ["t2"], "t4": ["t5", "t12", "t8", "t10"], "t5": ["t12", "t8", "t10", "t4", "t9"], "t2": ["t7", "t11"], "t3": [], "t0": [], "t1": [], "t10": ["t4", "t5", "t9", "t12"], "t11": ["t2"], "t12": ["t10", "t4", "t5", "t9"]};
+
+e = [];
+
+p = [];
+
+
+  $(document).ready(function() {
+    $(allSelector(e)).addClass("error");
+  });
+  
+  $(document).ready(function() {
+    for(i in p)
+    {
+      $(allSelector(p[i])).addClass("inconsistent");
+    }
+  });
+  
+  // extracts the type from a code span
+  getType = function(x){
+    return $(x).attr("class").split(" ")[0];
+  }
+  
+  // takes a list of classes, and returns a string that is a selector
+  // for all of those classes
+  allSelector = function(xs){
+    if(xs.length < 1){
+      return ""
+    }
+    xs_prime = []
+    for(i in xs)
+    {
+      xs_prime[i] = "." + xs[i]
+    }
+    return xs_prime.join()
+  }
+  
+  $(document).ready(function(){
+    // for a term that has mouse movement, highlight all of the elements with a type that that appears in the map m for the type of that term
+    $("span").mousemove(function(event){
+      if(this == event.target){
+        t = getType(this);
+        if(t != "*"){
+          $(allSelector(m[t])).addClass("comparable");
+          $("." + t).addClass("focus");
+        }
+      }
+    });
+    
+    $("span").mouseout(function(){
+      t = getType(this);
+      if(t != "*"){
+        $("." + t).removeClass("focus");
+        $(allSelector(m[t])).removeClass("comparable");
+      }
+    });
+  });
+  </script>
+  </head><body>
+  
+  <pre><span title="*" class="*"><span title="*" class="*">def fact(<span title="t1" class="t1"><span title="t2" class="t2">x</span></span>):</br>  <span title="*" class="*">if <span title="Bool" class="Bool"><span title="t2" class="t2">x</span> == <span title="t3" class="t3">0</span></span>:
+    <span title="*" class="*">return <span title="t4" class="t4">1</span></span></br>else :</br>    <span title="*" class="*">return <span title="t9" class="t9">(<span title="t2" class="t2">x</span> * <span title="t8" class="t8"><span title="t0" class="t0">fact</span>(<span title="t7" class="t7">(<span title="t2" class="t2">x</span> - <span title="t6" class="t6">1</span>)</span>)</span>)</span></span></br></span></br></span></br><span title="*" class="*"><span title="t10" class="t10">x</span> = <span title="t12" class="t12"><span title="t0" class="t0">fact</span>(<span title="t11" class="t11">4</span>)</span></span></br></span></pre>
+  </body></html>
