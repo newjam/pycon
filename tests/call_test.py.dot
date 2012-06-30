@@ -1,0 +1,35 @@
+digraph g {
+  "self[t3]" -> "self[t3]";
+  "'hi'[t5]" -> "return 'hi'[t4]";
+  "a.fun()[t11]" -> "x[t9]";
+  "class A:</br>  def fun(self):</br>    return 'hi'</br></br>[t0]" -> "self[t3]";
+  "self[t3]" -> "a[t7]";
+  "()" -> "()";
+  "class A:</br>  def fun(self):</br>    return 'hi'</br></br>[t0]" -> "a[t7]";
+  "class A:</br>  def fun(self):</br>    return 'hi'</br></br>[t0]" -> "A()[t8]";
+  "self[t3]" -> "A()[t8]";
+  "'hi'[t5]" -> "x[t9]";
+  "return 'hi'[t4]" -> "x[t9]";
+  "'hi'[t5]" -> "a.fun()[t11]";
+  "A()[t8]" -> "a[t7]";
+  "self[t3]" -> "class A:</br>  def fun(self):</br>    return 'hi'</br></br>[t0]";
+  "'hi'[String]" -> "a.fun()[t11]";
+  "class A:</br>  def fun(self):</br>    return 'hi'</br></br>[t0]" -> "class A:</br>  def fun(self):</br>    return 'hi'</br></br>[t0]";
+  "'hi'[String]" -> "'hi'[t5]";
+  "'hi'[String]" -> "return 'hi'[t4]";
+  "A[t6]" -> "(() -> t8)";
+  "a.fun[t10]" -> "(() -> t11)";
+  "self[t2]" -> "(t3)";
+  "'hi'[String]" -> "x[t9]";
+  "(() -> t0)" -> "A[t6]";
+  "fun:(() -> t4)" -> "a[t7]";
+  "fun:(() -> t4)" -> "class A:</br>  def fun(self):</br>    return 'hi'</br></br>[t0]";
+  "fun:(() -> t4)" -> "self[t3]";
+  "return 'hi'[t4]" -> "a.fun()[t11]";
+  "fun:(() -> t4)" -> "A()[t8]";
+  "(() -> t4)" -> "a.fun[t10]";
+  "self[t3]" -> "fun:t10";
+  "class A:</br>  def fun(self):</br>    return 'hi'</br></br>[t0]" -> "fun:t10";
+  "a[t7]" -> "fun:t10";
+  "A()[t8]" -> "fun:t10";
+}

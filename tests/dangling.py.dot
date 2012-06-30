@@ -1,0 +1,19 @@
+digraph g {
+  "()" -> "()";
+  "A()[t5]" -> "a[t4]";
+  "2.0[t2]" -> "foo[t1]";
+  "class A:</br>  foo = 2.0</br>[t0]" -> "a[t4]";
+  "class A:</br>  foo = 2.0</br>[t0]" -> "A()[t5]";
+  "A()[t5]" -> "bar:t7";
+  "a[t4]" -> "bar:t7";
+  "(() -> t0)" -> "A[t3]";
+  "A[t3]" -> "(() -> t5)";
+  "2.0[Num]" -> "2.0[t2]";
+  "2.0[Num]" -> "foo[t1]";
+  "class A:</br>  foo = 2.0</br>[t0]" -> "bar:t7";
+  "a.bar[t7]" -> "x[t6]";
+  "foo:t1" -> "bar:t7";
+  "foo:t1" -> "class A:</br>  foo = 2.0</br>[t0]";
+  "foo:t1" -> "a[t4]";
+  "foo:t1" -> "A()[t5]";
+}

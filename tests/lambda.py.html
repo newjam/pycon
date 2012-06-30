@@ -5,11 +5,11 @@
     .inconsistent { background-color:Orange; }
     .focus { background-color:LawnGreen; }
     .comparable { background-color:LimeGreen; }
-  </style><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script type="text/javascript">m = {"t8": ["t9", "t5", "t4", "t8"], "t9": ["t9", "t4", "t8", "t12", "t10"], "t6": ["t6"], "t7": ["t7", "t2"], "t4": ["t5", "t9", "t4", "t12", "t8", "t10"], "t5": ["t5", "t4", "t12", "t10", "t8"], "t2": ["t7", "t11", "t2"], "t3": ["t3"], "t0": ["t0"], "t1": ["t1"], "t10": ["t5", "t9", "t4", "t12", "t10"], "t11": ["t11", "t2"], "t12": ["t5", "t9", "t4", "t12", "t10"]};
+  </style><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script type="text/javascript">m = {"t8": ["t4", "t10", "t8"], "t9": ["t9", "t2"], "t6": ["t6", "t2"], "t7": ["t4", "t7"], "t4": ["t4", "t7", "t10", "t8"], "t5": ["t5", "t0"], "t2": ["t6", "t9", "t2"], "t3": ["t3"], "t0": ["t5", "t0"], "t1": ["t1"], "t10": ["t4", "t10", "t8"], "t11": ["t11"], "t12": ["t12"]};
 
-e = [];
+e = ["t12"];
 
-p = [];
+p = [["t11", "t6"]];
 
 
   $(document).ready(function() {
@@ -65,6 +65,5 @@ p = [];
   </script>
   </head><body>
   
-  <pre><span title="*" class="*"><span title="*" class="*">def fact(<span title="t1" class="t1"><span title="t2" class="t2">x</span></span>):</br>  <span title="*" class="*">if <span title="Bool" class="Bool"><span title="t2" class="t2">x</span> == <span title="t3" class="t3">0</span></span>:
-    <span title="*" class="*">return <span title="t5" class="t5">1</span></span></br>else :</br>    <span title="*" class="*">return <span title="t9" class="t9">(<span title="t2" class="t2">x</span> * <span title="t8" class="t8"><span title="t0" class="t0">fact</span>(<span title="t7" class="t7">(<span title="t2" class="t2">x</span> - <span title="t6" class="t6">1</span>)</span>)</span>)</span></span></br></span></br></span></br><span title="*" class="*"><span title="t10" class="t10">x</span> = <span title="t12" class="t12"><span title="t0" class="t0">fact</span>(<span title="t11" class="t11">4</span>)</span></span></br></span></pre>
+  <pre><span title="*" class="*"><span title="*" class="*"><span title="t0" class="t0">f</span> = <span title="t5" class="t5">lambda <span title="t1" class="t1"><span title="t2" class="t2">x</span></span>: <span title="t4" class="t4">(<span title="t2" class="t2">x</span> * <span title="t3" class="t3">2</span>)</span></span></span></br><span title="*" class="*">None</span></br><span title="*" class="*"><span title="t8" class="t8">x</span> = <span title="t10" class="t10"><span title="t0" class="t0">f</span>(<span title="t9" class="t9">2</span>)</span></span></br><span title="*" class="*">None</span></br></span></pre>
   </body></html>

@@ -1,0 +1,69 @@
+<html><head><style type="text/css">
+    .error.focus { background-color:IndianRed; }
+    .error.comparable { background-color:IndianRed; }
+    .error { background-color:Red; }
+    .inconsistent { background-color:Orange; }
+    .focus { background-color:LawnGreen; }
+    .comparable { background-color:LimeGreen; }
+  </style><script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script><script type="text/javascript">m = {"t33": ["t22", "t14", "t11", "t33", "t32", "t10", "t9"], "t14": ["t14", "t22", "t11", "t14", "t22", "t11", "t14", "t8", "t4", "t5", "t33", "t32", "t10", "t9", "t23", "t0"], "t15": ["t6", "t27", "t24", "t2", "t15", "t17", "t26", "t25"], "t16": ["t28", "t7", "t3", "t31", "t16", "t18", "t30", "t29"], "t17": ["t27", "t24", "t2", "t6", "t15", "t17", "t25", "t26"], "t10": ["t11", "t22", "t14", "t33", "t32", "t10", "t9"], "t11": ["t11", "t22", "t14", "t11", "t22", "t14", "t11", "t8", "t5", "t4", "t33", "t32", "t0", "t10", "t23", "t9"], "t13": ["t13"], "t18": ["t3", "t7", "t31", "t28", "t16", "t18", "t30", "t29"], "t19": ["t19"], "t30": ["t7", "t31", "t28", "t3", "t16", "t18", "t30"], "t31": ["t31", "t28", "t16", "t18", "t30", "t29"], "t32": ["t22", "t14", "t11", "t33", "t32", "t10", "t9"], "t8": ["t22", "t11", "t14", "t8", "t5", "t23"], "t9": ["t22", "t11", "t14", "t33", "t32", "t10", "t9"], "t6": ["t6", "t15", "t17", "t26", "t25"], "t7": ["t7", "t16", "t18", "t30", "t29"], "t4": ["t22", "t11", "t14", "t4", "t0"], "t5": ["t22", "t11", "t14", "t8", "t5", "t23"], "t2": ["t2", "t15", "t17", "t25", "t26"], "t3": ["t3", "t16", "t18", "t29", "t30"], "t0": ["t14", "t22", "t11", "t4", "t0"], "t1": ["t1", "t1", "t1"], "t29": ["t7", "t31", "t28", "t3", "t16", "t18", "t29"], "t28": ["t31", "t28", "t16", "t18", "t30", "t29"], "t21": ["t21"], "t23": ["t11", "t14", "t22", "t8", "t5", "t23"], "t22": ["t22", "t11", "t22", "t14", "t11", "t14", "t22", "t4", "t33", "t32", "t23", "t10", "t0", "t8", "t5", "t9"], "t25": ["t2", "t27", "t24", "t6", "t15", "t17", "t25"], "t24": ["t27", "t24", "t15", "t17", "t25", "t26"], "t27": ["t27", "t24", "t15", "t17", "t25", "t26"], "t26": ["t27", "t24", "t6", "t2", "t15", "t17", "t26"]};
+
+e = ["*", "*"];
+
+p = [["t6", "t2"], ["t2", "t6"]];
+
+
+  $(document).ready(function() {
+    $(allSelector(e)).addClass("error");
+  });
+  
+  $(document).ready(function() {
+    for(i in p)
+    {
+      $(allSelector(p[i])).addClass("inconsistent");
+    }
+  });
+  
+  // extracts the type from a code span
+  getType = function(x){
+    return $(x).attr("class").split(" ")[0];
+  }
+  
+  // takes a list of classes, and returns a string that is a selector
+  // for all of those classes
+  allSelector = function(xs){
+    if(xs.length < 1){
+      return ""
+    }
+    xs_prime = []
+    for(i in xs)
+    {
+      xs_prime[i] = "." + xs[i]
+    }
+    return xs_prime.join()
+  }
+  
+  $(document).ready(function(){
+    // for a term that has mouse movement, highlight all of the elements with a type that that appears in the map m for the type of that term
+    $("span").mousemove(function(event){
+      if(this == event.target){
+        t = getType(this);
+        if(t != "*"){
+          $(allSelector(m[t])).addClass("comparable");
+          $("." + t).addClass("focus");
+        }
+      }
+    });
+    
+    $("span").mouseout(function(){
+      t = getType(this);
+      if(t != "*"){
+        $("." + t).removeClass("focus");
+        $(allSelector(m[t])).removeClass("comparable");
+      }
+    });
+  });
+  </script>
+  </head><body>
+  
+  <pre><span title="*" class="*"><span title="*" class="*"><span title="t0" class="t0">c1</span> = <span title="t4" class="t4"><span title="t1" class="t1">Complex</span>(<span title="t2" class="t2">2.0</span>, <span title="t3" class="t3">1.0</span>)</span></span></br><span title="*" class="*"><span title="t5" class="t5">c2</span> = <span title="t8" class="t8"><span title="t1" class="t1">Complex</span>(<span title="t6" class="t6">'wat'</span>, <span title="t7" class="t7">1.0</span>)</span></span></br><span title="*" class="*"><span title="t9" class="t9">c3</span> = <span title="t10" class="t10">(<span title="t0" class="t0">c1</span> + <span title="t5" class="t5">c2</span>)</span></span></br><span title="*" class="*">class Complex:</br>  <span title="*" class="*">def __init__(<span title="t13" class="t13"><span title="t14" class="t14">self</span>, <span title="t15" class="t15">r</span>, <span title="t16" class="t16">i</span></span>):</br>    <span title="*" class="*"><span title="t17" class="t17"><span title="t14" class="t14">self</span>.r</span> = <span title="t15" class="t15">r</span></span></br>    <span title="*" class="*"><span title="t18" class="t18"><span title="t14" class="t14">self</span>.i</span> = <span title="t16" class="t16">i</span></span></br></span></br>  <span title="*" class="*">def __add__(<span title="t21" class="t21"><span title="t22" class="t22">self</span>, <span title="t23" class="t23">other</span></span>):</br>    <span title="*" class="*"><span title="t24" class="t24">r</span> = <span title="t27" class="t27">(<span title="t25" class="t25"><span title="t22" class="t22">self</span>.r</span> + <span title="t26" class="t26"><span title="t23" class="t23">other</span>.r</span>)</span></span></br>    <span title="*" class="*"><span title="t28" class="t28">i</span> = <span title="t31" class="t31">(<span title="t29" class="t29"><span title="t22" class="t22">self</span>.i</span> + <span title="t30" class="t30"><span title="t23" class="t23">other</span>.i</span>)</span></span></br>    <span title="*" class="*">return <span title="t33" class="t33"><span title="t1" class="t1">Complex</span>(<span title="t24" class="t24">r</span>, <span title="t28" class="t28">i</span>)</span></span></br></span></br></span></br></span></pre>
+  </body></html>

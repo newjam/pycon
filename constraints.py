@@ -22,14 +22,29 @@ class Closure(Typish):
     clsr.constraints = [c.apply(sub) for c in self.constraints]
     return clsr
 
-  def setCurrentTerm(term):
-    self.currentTerm = term
+  def toGraphvizGeneric(self, extract):
+    r = "digraph g {\n"
+    for c in self.constraints:
+      print("DEBUG: {0} -> {1}".format(c.left, c.right))
+      r += "  \"{0}\" -> \"{1}\";\n".format(extract(c.left), extract(c.right))
+    r += "}"
+    return r
 
-  # return all type variables y such that x <: y or y <: x
+
+  def toGraphvizType(self):
+    return self.toGraphvizGeneric(lambda x: x)
+  def toGraphvizExp(self):
+    return self.toGraphvizGeneric(lambda x: x.exp)
+
+# return all type variables y such that x <: y or y <: x
   def comparable(self, x):
     over  = [c.right for c in self.constraints if c.left == x and c.right.isVar() ]
     under = [c.left for c in self.constraints if c.right == x and c.left.isVar()]
-    return over + under
+    all = (over + under)
+    all.append(x)
+    for tv in all:
+      tv.constraints = self.constraints
+    return sorted(all) #sorted(over + under, cmp = lambda x, y: self.cmp(x, y))
 
   def upper(self, t):
     return {c.right for c in self.constraints if c.left == t and not c.right.isVar()} 
@@ -150,15 +165,15 @@ class CSubtype(CArity2):
       return self.left.decompose(self.right) 
     elif self.left.isPrim and self.right.isField:
       if self.right.name in self.left.fields:
-        return {self.left.fields[self.right.name] < self.right.t}
+        return {self.left.fields[self.right.name] << self.right.t}
     return set()
 
   def transitive(self, cs):
     ncs = set()
     if self.right.isVar():
-      ncs |= {self.left < c.right for c in cs if c.left == self.right}
+      ncs |= {self.left << c.right for c in cs if c.left == self.right}
     if self.left.isVar():
-      ncs |= {c.left < self.right for c in cs if c.right == self.left}
+      ncs |= {c.left << self.right for c in cs if c.right == self.left}
     return ncs
   def consistent(self):
     return True if self.left.isVar() or self.right.isVar() else type(self.left) == type(self.right)

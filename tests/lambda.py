@@ -4,6 +4,7 @@
 # f:a->b
 f = lambda x: x * 2
 
+
 # a <: String
 f("hello")
 # a <: Num

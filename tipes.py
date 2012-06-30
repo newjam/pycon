@@ -17,7 +17,7 @@ class Type(Typish):
     #return Substitution({s:self.apply(Substitution({s:TInf()}))})
       return Substitution({s.name:self})
 
-  def __lt__(self, other):
+  def __lshift__(self, other):
     return CSubtype(self, other)
 
   def instantiate(self):
@@ -108,7 +108,7 @@ class TNple(Type):
   def apply(self, sub):
     return TNple([t.apply(sub) for t in self.types])
   def decompose(self, other):
-    return {x < y for x, y in zip(self.types, other.types)}
+    return {x << y for x, y in zip(self.types, other.types)}
   def __str__(self):
     return "({0})".format(", ".join([str(t) for t in self.types])) 
   def __eq__(self, other):
@@ -159,9 +159,9 @@ class TVar(Type):
     return self.name == other.name if type(self) == type(other) else False
   def __hash__(self):
     return self.name.__hash__()
-
-
-
+  def __lt__(self, other):
+    #print("is {0} < {1}?".format(self, other))
+    return self << other in self.constraints
 
 class TLR(Type):
   def ftv(self):
@@ -223,6 +223,7 @@ class TNum(TLit):
   def __init__(self):
     self.fields = dict()
     self.fields["__add__"] = TFun(TNple([self]), self)
+    self.fields["__sub__"] = TFun(TNple([self]), self)
     self.fields["__mul__"] = TFun(TNple([self]), self)
     self.fields["__eq__"] = TFun(TNple([self]), TBool())
   def __str__(self):
